@@ -1,0 +1,88 @@
+using System;
+
+class Program
+{
+    static string MagicPotionIdentifier(int power)
+    {
+        int cubeRoot = (int)Math.Round(Math.Cbrt(power));
+        return cubeRoot * cubeRoot * cubeRoot == power ? "YES" : "NO";
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(MagicPotionIdentifier(1)); // YES
+        Console.WriteLine(MagicPotionIdentifier(132651201231)); // NO
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static int[] FindDuplicates(int[] outcomes)
+    {
+        HashSet<int> seen = new HashSet<int>();
+        List<int> duplicates = new List<int>();
+        foreach (var outcome in outcomes)
+        {
+            if (seen.Contains(outcome))
+            {
+                duplicates.Add(outcome);
+            }
+            else
+            {
+                seen.Add(outcome);
+            }
+        }
+        return duplicates.ToArray();
+    }
+
+    static void Main()
+    {
+        int[] outcomes = { 123456, 234567, 123347, 456789, 567890, 678901, 789012, 890123, 901234, 112233, 223344, 334455, 789012, 222234, 123347 };
+        int[] result = FindDuplicates(outcomes);
+        Console.WriteLine($"[{string.Join(", ", result)}]");  // [123347, 789012]
+    }
+}
+
+using System;
+using System.Text;
+
+class Program
+{
+    static string ReformatString(string s)
+    {
+        StringBuilder result = new StringBuilder();
+        bool toggle = true;
+
+        foreach (char c in s)
+        {
+            if (Char.IsLetter(c))
+            {
+                if (toggle)
+                {
+                    result.Append(Char.ToUpper(c));
+                }
+                else
+                {
+                    result.Append(Char.ToLower(c));
+                }
+                toggle = !toggle;
+            }
+            else
+            {
+                result.Append(c); // Keep non-letter characters unchanged
+            }
+        }
+
+        return result.ToString();
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(ReformatString("Za^B8g@E2jH*kWl!MoPqXr7YvT1c$Fs3Ud9IwZ&yX0pLkV6sHqN^tB4rA+oZ%gFj"));
+        // Output example: "Za^B8g@E2jH*kWl!MoPqXr7YvT1c$Fs3Ud9IwZ&yX0pLkV6sHqN^tB4rA+oZ%gFj"
+    }
+}
